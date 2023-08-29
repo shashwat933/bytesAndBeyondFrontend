@@ -44,28 +44,29 @@ const Blogs = () => {
                     </svg>
                     <span className="sr-only">Loading...</span>
                 </div></div>}
-            if(token){!loading &&
-                <div className=' mobile1:items-center laptop:w-128 flex flex-col laptop:flex-row laptop:justify-between laptop:flex-wrap  pt-8 my-4 mx-auto '>
-                    {blogs.length !== 0 && blogs.map((blog) =>
-                        <BlogCard
+            {token && !loading &&
+            <div className=' mobile1:items-center laptop:w-128 flex flex-col laptop:flex-row laptop:justify-between laptop:flex-wrap  pt-8 my-4 mx-auto '>
+                {blogs.length !== 0 && blogs.map((blog) =>
+                    <BlogCard
 
-                            key={blog._id}
-                            id={blog?._id}
-                            isUser={false}
-                            title={blog?.title}
-                            description={blog?.description}
-                            image={blog?.image}
-                            username={blog?.user?.username}
-                            time={blog?.createdAt}
-                        />
-                    )}
-                    {blogs.length === 0 && <>
-                        <div className='mx-auto'><p className='text-12'>No blogs found</p> </div>
+                        key={blog._id}
+                        id={blog?._id}
+                        isUser={false}
+                        title={blog?.title}
+                        description={blog?.description}
+                        image={blog?.image}
+                        username={blog?.user?.username}
+                        time={blog?.createdAt}
+                    />
+                )}
+                {blogs.length === 0 && <>
+                    <div className='mx-auto'><p className='text-12'>No blogs found</p> </div>
 
-                    </>}
-                </div>}
-            else{
-                !loading && <h1>Login first</h1>
+                </>}
+            </div>}
+            
+            {
+              !token &&   !loading && <h1>Login first</h1>
             }
 
 
