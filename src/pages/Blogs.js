@@ -7,6 +7,7 @@ import { BackendUrl } from '../App';
 
 const Blogs = () => {
     const token = localStorage.getItem('token');
+
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const getAllBlogs = async () => {
@@ -43,7 +44,7 @@ const Blogs = () => {
                     </svg>
                     <span className="sr-only">Loading...</span>
                 </div></div>}
-            {!loading &&
+            if(token){!loading &&
                 <div className=' mobile1:items-center laptop:w-128 flex flex-col laptop:flex-row laptop:justify-between laptop:flex-wrap  pt-8 my-4 mx-auto '>
                     {blogs.length !== 0 && blogs.map((blog) =>
                         <BlogCard
@@ -63,6 +64,9 @@ const Blogs = () => {
 
                     </>}
                 </div>}
+            else{
+                !loading && <h1>Login first</h1>
+            }
 
 
 
