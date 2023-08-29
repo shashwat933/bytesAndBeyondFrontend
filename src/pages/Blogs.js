@@ -2,11 +2,14 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import BlogCard from '../components/BlogCard';
 import { BackendUrl } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Blogs = () => {
     const token = localStorage.getItem('token');
+    const navigate = useNavigate();
+   
 
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,7 +20,7 @@ const Blogs = () => {
                     "Authorization": `Bearer ${token}`
                 }
             });
-            console.log(data);
+
             if (data && data.success) {
                 setBlogs(data.blogs);
             }
@@ -26,23 +29,18 @@ const Blogs = () => {
             console.log(error);
         }
     }
-    if(!token){
-        return (
-            <>
-                {
-                     !loading && <h1>Login first</h1>
-                }
 
-            </>
-        )
-    }
-
+ 
 
 
 
     useEffect(() => {
-
-        getAllBlogs();
+        if(token)
+            getAllBlogs();
+        else {
+            setLoading(false);
+            setBlogs('');
+        }
 
     }, [])
 
@@ -59,27 +57,32 @@ const Blogs = () => {
                     <span className="sr-only">Loading...</span>
                 </div></div>}
             {token && !loading &&
-            <div className=' mobile1:items-center laptop:w-128 flex flex-col laptop:flex-row laptop:justify-between laptop:flex-wrap  pt-8 my-4 mx-auto '>
-                {blogs.length !== 0 && blogs.map((blog) =>
-                    <BlogCard
+                <div className=' mobile1:items-center laptop:w-128 flex flex-col laptop:flex-row laptop:justify-between laptop:flex-wrap  pt-8 my-4 mx-auto '>
+                    {blogs.length !== 0 && blogs.map((blog) =>
+                        <BlogCard
 
-                        key={blog._id}
-                        id={blog?._id}
-                        isUser={false}
-                        title={blog?.title}
-                        description={blog?.description}
-                        image={blog?.image}
-                        username={blog?.user?.username}
-                        time={blog?.createdAt}
-                    />
-                )}
-                {blogs.length === 0 && <>
-                    <div className='mx-auto'><p className='text-12'>No blogs found</p> </div>
+                            key={blog._id}
+                            id={blog?._id}
+                            isUser={false}
+                            title={blog?.title}
+                            description={blog?.description}
+                            image={blog?.image}
+                            username={blog?.user?.username}
+                            time={blog?.createdAt}
+                        />
+                    )}
+                    {blogs.length === 0 && <>
+                        <div className='mx-auto'><p className='text-12'>No blogs found</p> </div>
 
-                </>}
-            </div>}
-            
-            
+                    </>}
+                </div>}
+                {!token && !loading &&
+                
+                <div className=' mobile1:items-center laptop:w-128 flex flex-col laptop:flex-row laptop:justify-between laptop:flex-wrap  pt-8 my-4 mx-auto '>
+                <div className='mx-auto'><h1 >Please Login first.</h1> </div>
+                </div>}
+
+
 
 
         </>
