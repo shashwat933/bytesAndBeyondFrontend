@@ -26,6 +26,20 @@ const Blogs = () => {
             console.log(error);
         }
     }
+    if(!token){
+        return (
+            <>
+                {
+                     !loading && <h1>Login first</h1>
+                }
+
+            </>
+        )
+    }
+
+
+
+
     useEffect(() => {
 
         getAllBlogs();
@@ -65,10 +79,7 @@ const Blogs = () => {
                 </>}
             </div>}
             
-            {
-              !token &&   !loading && <h1>Login first</h1>
-            }
-
+            
 
 
         </>
