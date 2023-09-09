@@ -10,8 +10,8 @@ import { Toaster } from 'react-hot-toast'
 import NavigationPC from './components/HeaderPc'
 import NavigationPhone from './components/HeaderMobile';
 import Footer from './components/Footer';
-// export const BackendUrl ="https://bytesandbeyond.onrender.com";
-export const BackendUrl ="http://localhost:8080";
+export const BackendUrl ="https://bytesandbeyond.onrender.com";
+
 
 
 function App() {
