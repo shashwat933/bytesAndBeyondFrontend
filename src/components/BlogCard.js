@@ -29,7 +29,7 @@ export default function BlogCard({ title, description, image, username, time, id
                 <img className="h-sizeOfImage w-full" src={image} alt="Technical Blog" />
                 <div className="px-6 py-4 ">
                     <div className="font-bold text-xl mb-2">{title}</div>
-                    <p className="text-gray-700 line-clamp-4 text-base">
+                    <p className="text-gray-700 line-clamp-4 whitespace-pre text-base">
                         {description}
                     </p>
                 </div>

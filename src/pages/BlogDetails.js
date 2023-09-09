@@ -68,7 +68,7 @@ const BlogDetails = () => {
                     title: inputs.title,
                     description: inputs.description,
                     image: inputs.image,
-                    user: id
+                    
                 },
                 {
                     headers: {
